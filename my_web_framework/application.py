@@ -43,3 +43,11 @@ class Application:
 
     def get_request_method(self, environ: dict):
         return environ['REQUEST_METHOD']
+
+    def get_request_params(self, environ: dict) -> dict:
+        request_params = {}
+        dict_items = environ['QUERY_STRING'].split('&')
+        for item in dict_items:
+            key, val = item.split('=')
+            request_params.update({key: val})
+        return request_params
