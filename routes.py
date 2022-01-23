@@ -1,5 +1,5 @@
-from controllers.index import Index
-from controllers.about import About
+from controllers import Index
+from controllers import About
 
 ROUTES = {
     '/': Index(),
