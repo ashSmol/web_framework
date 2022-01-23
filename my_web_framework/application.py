@@ -1,9 +1,13 @@
+from pprint import pprint
+
+
 class Application:
     def __init__(self, routes: dict, front_controllers: list):
         self.routes = routes
         self.front_controllers = front_controllers
 
     def __call__(self, environ: dict, start_response):
+
         rq = {}
         print('*' * 50)
         print(f'Request before front controller:\n {rq}')
@@ -19,6 +23,7 @@ class Application:
             ('Content-Length', str(len(body)))
         ]
         start_response(status, headers)
+        pprint(environ)
         return [body]
 
     def get_controller(self, environ: dict):
@@ -35,3 +40,6 @@ class Application:
                 path = path[:- 1]
 
         return self.routes[path] if path in self.routes else NotFoundPage()
+
+    def get_request_method(self, environ: dict):
+        return environ['REQUEST_METHOD']
