@@ -5,6 +5,7 @@
     <title>Contact Us</title>
 </head>
 <body>
+    {% include 'menu.html' %}
 <form method="post">
     <div>
         <label for="topic">Message topic</label>
@@ -16,7 +17,7 @@
     </div>
     <div>
         <label for="response_to">Your email for response</label>
-        <input type="email" neame="response_to" id="response_to" placeholder="email address">
+        <input type="email" name="response_to" id="response_to" placeholder="email address">
     </div>
     <div>
         <button>Send my greetings</button>
