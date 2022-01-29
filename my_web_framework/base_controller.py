@@ -4,9 +4,9 @@ from jinja2 import Environment, FileSystemLoader
 
 
 class BaseController:
-    def get_rendered_template(self, template_name):
+    def get_rendered_template(self, template_name: str, template_params: dict):
         template = Environment(loader=FileSystemLoader('templates')).get_template(template_name)
-        return template.render().encode('utf8')
+        return template.render(template_params).encode('utf8')
 
     def get_request_method(self, env: dict) -> str:
         return env['REQUEST_METHOD']
@@ -27,10 +27,11 @@ class BaseController:
             request_params = self.parse_request_params(unquote(request_params_bytes.decode('utf-8')))
         return request_params
 
-    def parse_request_params(self, query) -> dict:
+    def parse_request_params(self, query: str) -> dict:
         request_params = {}
-        dict_items = query.split('&')
-        for item in dict_items:
-            key, val = item.split('=')
-            request_params.update({key: val})
+        if len(query) > 0:
+            dict_items = query.split('&')
+            for item in dict_items:
+                key, val = item.split('=')
+                request_params.update({key: val})
         return request_params

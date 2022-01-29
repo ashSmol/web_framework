@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>Default Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block header %}
 
-    {% include 'menu.html' %}
-    
-    <p>About page!!!!</p>
-
-
-
-</body>
-</html>
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>About page header</h1>
+    <p class="important">
+      Welcome to my awesome About page!!!
+    </p>
+{% endblock %}

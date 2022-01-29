@@ -6,7 +6,8 @@ class About(BaseController):
 
     def __call__(self, request):
         status_code = '200 OK'
-        body = self.get_rendered_template('about.html')
+        template_params = {}
+        body = self.get_rendered_template('about.html', template_params)
         print('Hello from about controller')
         pprint(request)
         return status_code, body
