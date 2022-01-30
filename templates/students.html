@@ -11,11 +11,11 @@
     <p class="important">
       Below listed categories of study courses on my site:
     </p>
-{% set categories = params.categories %}
+{% set students = params.students %}
 
 <ul>
-{% for category in categories %}
-    <li>{{ category }}</li>
+{% for student in students %}
+    <li>{{ student }}</li>
 {% endfor %}
 </ul>
 {% endblock %}

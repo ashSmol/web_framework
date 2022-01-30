@@ -4,7 +4,7 @@ from model import TrainingSite
 from my_web_framework import BaseController
 
 
-class CourseCategories(BaseController):
+class Students(BaseController):
 
     def __call__(self, request, model: TrainingSite):
         status_code = '200 OK'
@@ -20,10 +20,10 @@ class CourseCategories(BaseController):
         if self.get_request_method(request) == 'POST':
             template_params.update(self.get_post_params(request))
             print(f'template params: {template_params}')
-            body = self.get_rendered_template('categories.html', template_params)
+            body = self.get_rendered_template('students.html', template_params)
             return status_code, body
 
-        template_params.update({'categories': model.course_categories})
-        body = self.get_rendered_template('categories.html', template_params)
+        template_params.update({'students': model.students})
+        body = self.get_rendered_template('students.html', template_params)
 
         return status_code, body
