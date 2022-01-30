@@ -2,7 +2,7 @@ from pprint import pprint
 from my_web_framework import BaseController
 
 
-class Contact(BaseController):
+class CourseCategories(BaseController):
 
     def __call__(self, request, model):
         status_code = '200 OK'
@@ -21,6 +21,6 @@ class Contact(BaseController):
             body = self.get_rendered_template('contact.html', template_params)
             return status_code, body
 
-        body = self.get_rendered_template('contact.html', template_params)
+        body = self.get_rendered_template('categories.html', template_params)
 
         return status_code, body

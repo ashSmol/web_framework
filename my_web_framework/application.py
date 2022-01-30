@@ -1,7 +1,8 @@
 class Application:
-    def __init__(self, routes: dict, front_controllers: list):
+    def __init__(self, routes: dict, front_controllers: list, model):
         self.routes = routes
         self.front_controllers = front_controllers
+        self.model = model
 
     def __call__(self, environ: dict, start_response):
         self.env = environ
@@ -9,7 +10,7 @@ class Application:
             front_obj = front_controller(self.env)
             self.env = front_obj()
         page_controller = self.get_controller()
-        status, body = page_controller(self.env)
+        status, body = page_controller(self.env, self.model)
         headers = [
             ('Content-type', 'text/html'),
             ('Content-Length', str(len(body)))
@@ -19,7 +20,7 @@ class Application:
 
     def get_controller(self):
         class NotFoundPage:
-            def __call__(self, request):
+            def __call__(self, request, model):
                 status_code = '404 Not Found'
                 body = b'<h1>!Page not found. 404 Error !!!</h1>'
                 return status_code, body
