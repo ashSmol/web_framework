@@ -6,7 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 class BaseController:
     def get_rendered_template(self, template_name: str, template_params: dict):
         template = Environment(loader=FileSystemLoader('templates')).get_template(template_name)
-        return template.render(template_params).encode('utf8')
+        return template.render(params=template_params).encode('utf8')
 
     def get_request_method(self, env: dict) -> str:
         return env['REQUEST_METHOD']

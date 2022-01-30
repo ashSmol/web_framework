@@ -16,8 +16,11 @@ class Contact(BaseController):
             pprint(self.get_get_params(request))
 
         if self.get_request_method(request) == 'POST':
-            print(self.get_post_params(request))
             template_params.update(self.get_post_params(request))
+            print(f'template params: {template_params}')
+            body = self.get_rendered_template('contact.html', template_params)
+            return status_code, body
+
         body = self.get_rendered_template('contact.html', template_params)
 
         return status_code, body
