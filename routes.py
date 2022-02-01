@@ -4,6 +4,7 @@ from controllers import Contact
 from controllers import CourseCategories
 from controllers import Courses
 from controllers import Students
+from controllers import CreateCategory
 
 ROUTES = {
     '/': Index(),
@@ -12,4 +13,6 @@ ROUTES = {
     '/categories': CourseCategories(),
     '/courses': Courses(),
     '/students': Students(),
+    '/create_category': CreateCategory(),
+
 }

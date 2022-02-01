@@ -15,7 +15,12 @@
 
 <ul>
 {% for category in categories %}
-    <li>{{ category }}</li>
+    <li>{{ category.name }}</li>
 {% endfor %}
 </ul>
+<br>
+<br>
+<br>
+<a href="/create_category"><button>Create new category</button></a>>
+
 {% endblock %}

@@ -5,3 +5,4 @@ from .contact import Contact
 from .course_categories import CourseCategories
 from .students import Students
 from .courses import Courses
+from .create_category import CreateCategory

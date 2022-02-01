@@ -1,9 +1,11 @@
 class CourseCategory:
     name: str
+    description: str
 
 
 class Course:
     name: str
+    description: str
 
 
 class Student:

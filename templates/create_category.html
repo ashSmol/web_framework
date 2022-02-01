@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block header %}
+
+<style type="text/css">
+        .important { color: #336699; }
+
+
+
+
+</style>
+{% endblock %}
+{% block content %}
+<h1>Create a new category</h1>
+<p class="important">
+    New category fields:
+</p>
+<form method="post">
+    <div>
+        <label for="category_name">Category name: </label>
+        <input name="category_name" id="category_name" placeholder="Enter new category name here">
+    </div>
+    <div>
+        <label for="category_description">Category description: </label>
+        <input name="category_description" id="category_description" placeholder="Enter text here">
+    </div>
+    <!--    <div>-->
+    <!--        <label for="response_to">Your email for response</label>-->
+    <!--        <input type="email" name="response_to" id="response_to" placeholder="email address">-->
+    <!--    </div>-->
+    <div>
+        <button>Create new category</button>
+    </div>
+</form>
+{% set category = params['category'] %}
+
+{% if category %}
+A New category with name <b>{{ category.name }}</b>  and   <b>{{ category.description }}</b> is created!!!
+{% endif %}
+{% endblock %}
