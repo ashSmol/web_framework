@@ -5,6 +5,7 @@
 <style type="text/css">
         .important { color: #336699; }
 
+
 </style>
 {% endblock %}
 {% block content %}
@@ -16,7 +17,14 @@
 
 <ul>
     {% for course in courses %}
-    <li>{{ course }}</li>
+    <li>{{ course.name }} {{ course.description }}</li>
     {% endfor %}
 </ul>
+<br>
+<br>
+<br>
+<a href="/create_course">
+    <button>Create new course</button>
+</a>>
+
 {% endblock %}

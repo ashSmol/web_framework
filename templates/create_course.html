@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block header %}
+
+<style type="text/css">
+        .important { color: #336699; }
+
+
+
+
+</style>
+{% endblock %}
+{% block content %}
+<h1>Create a new course</h1>
+<p class="important">
+    New course fields:
+</p>
+<form method="post">
+    <div>
+        <label for="course_name">Category name: </label>
+        <input name="course_name" id="course_name" placeholder="Enter new category name here">
+    </div>
+    <div>
+        <label for="course_description">Category description: </label>
+        <input name="course_description" id="course_description" placeholder="Enter text here">
+    </div>
+    <!--    <div>-->
+    <!--        <label for="response_to">Your email for response</label>-->
+    <!--        <input type="email" name="response_to" id="response_to" placeholder="email address">-->
+    <!--    </div>-->
+    <div>
+        <button>Create new course</button>
+    </div>
+</form>
+{% set course = params['course'] %}
+
+{% if category %}
+A New course with name <b>{{ course.name }}</b>  and   <b>{{ course.description }}</b> is created!!!
+{% endif %}
+{% endblock %}
