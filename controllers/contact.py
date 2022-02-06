@@ -1,9 +1,9 @@
 from pprint import pprint
-from my_web_framework import BaseController
+from my_web_framework import BaseController, Debug
 
 
 class Contact(BaseController):
-
+    @Debug()
     def __call__(self, request, model):
         status_code = '200 OK'
         template_params = {}

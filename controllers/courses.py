@@ -1,11 +1,11 @@
 from pprint import pprint
 
 from model import TrainingSite
-from my_web_framework import BaseController
+from my_web_framework import BaseController, Debug
 
 
 class Courses(BaseController):
-
+    @Debug()
     def __call__(self, request, model: TrainingSite):
         status_code = '200 OK'
         template_params = {}
