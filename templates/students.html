@@ -15,7 +15,13 @@
 
 <ul>
 {% for student in students %}
-    <li>{{ student }}</li>
+    <li>{{ student.name }} {{ student.surname }}</li>
 {% endfor %}
 </ul>
+<br>
+<br>
+<br>
+<a href="/create_student">
+    <button>Create a new student</button>
+</a>
 {% endblock %}

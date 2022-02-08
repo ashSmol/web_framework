@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Create Sudent{% endblock %}
+{% block header %}
+
+<style type="text/css">
+        .important { color: #336699; }
+
+
+
+
+</style>
+{% endblock %}
+{% block content %}
+<h1>Create a new student</h1>
+<p class="important">
+    New student fields:
+</p>
+<form method="post">
+    <div>
+        <label for="firstname">First name: </label>
+        <input name="firstname" id="firstname" placeholder="Enter name here">
+    </div>
+    <div>
+        <label for="surname">Surname: </label>
+        <input name="surname" id="surname" placeholder="Enter surname here">
+    </div>
+    <!--    <div>-->
+    <!--        <label for="response_to">Your email for response</label>-->
+    <!--        <input type="email" name="response_to" id="response_to" placeholder="email address">-->
+    <!--    </div>-->
+    <div>
+        <button>Create a new student</button>
+    </div>
+</form>
+{% set student = params['student'] %}
+
+{% if student %}
+A New student with name: <b>{{ student.name }}</b> <br> and surname:  <b>{{ student.surname }}</b> <br> is created!!!
+{% endif %}
+{% endblock %}

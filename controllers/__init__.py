@@ -7,3 +7,4 @@ from .students import Students
 from .courses import Courses
 from .create_category import CreateCategory
 from .create_course import CreateCourse
+from .create_student import CreateStudent

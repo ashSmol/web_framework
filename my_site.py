@@ -2,7 +2,7 @@ from my_web_framework import Application
 from patterns import ObjectBuilder
 from routes import ROUTES
 from controllers import MyFrontController
-from model import TrainingSite
+from model import TrainingSite, Student
 from logger import Logger
 
 logger = Logger('my_logger')
@@ -27,9 +27,10 @@ java_course = ObjectBuilder('course').set_obj_name('Java').set_obj_description(
 
 logger.log('creating courses!!!')
 
+students = [Student('Yuri', 'Gagarin'), Student('Vasya', 'Pupkin'), Student('Maria', 'Ivanova'), ]
 
 my_site_model.course_categories = [programming_category, testing_category]
 my_site_model.courses = [python_course, java_course]
-my_site_model.students = ['Vasya Pupkin', 'Yura Lyubkin', 'Kolya Kot']
+my_site_model.students = students
 
 application = Application(ROUTES, front_controllers, my_site_model)

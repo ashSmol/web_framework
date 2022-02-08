@@ -6,6 +6,7 @@ class CourseCategory:
 class Course:
     name: str
     description: str
+    students: list
 
 
 class Student:
