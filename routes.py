@@ -1,4 +1,4 @@
-from controllers import Index, CreateCourse, CreateStudent
+from controllers import Index, CreateCourse, CreateStudent, CoursePage
 from controllers import About
 from controllers import Contact
 from controllers import CourseCategories
@@ -16,5 +16,6 @@ ROUTES = {
     '/create_category': CreateCategory(),
     '/create_course': CreateCourse(),
     '/create_student': CreateStudent(),
+    '/course': CoursePage(),
 
 }

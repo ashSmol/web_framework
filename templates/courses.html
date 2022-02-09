@@ -17,7 +17,7 @@
 
 <ul>
     {% for course in courses %}
-    <li>{{ course.name }} {{ course.description }}</li>
+    <li><a href="/course?name={{ course.name }}"> {{ course.name }} </a> {{ course.description }}</li>
     {% endfor %}
 </ul>
 <br>

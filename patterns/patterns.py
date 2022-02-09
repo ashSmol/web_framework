@@ -1,3 +1,5 @@
+from collections.abc import Iterator
+
 from model import CourseCategory, Course
 
 

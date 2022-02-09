@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% set course = params.course %}
+{% set all_students = params.students %}
+{% block title %} {{ course.name }} {% endblock %}
+{% block header %}
+
+<style type="text/css">
+        .important { color: #336699; }
+
+
+
+
+</style>
+{% endblock %}
+{% block content %}
+<h1>Information page about {{ course.name }} course</h1>
+<h2>Description of the course:</h2>
+<p>{{ course.description }}</p>
+<p class="important">
+    Below listed students of the {{ course.name }}:
+</p>
+<ul>
+    {% for student in course %}
+    <li>{{ student.name }} {{ student.surname }}</li>
+    {% endfor %}
+</ul>
+<br>
+<br>
+<br>
+<br>
+<form method="post">
+    <h3>Sign up a student for course: </h3>
+    <div>
+        <label for="student">Select a Student: </label>
+        <select name="student" id="student">
+            {% for student in all_students %}
+            <option value="{{ student.name }} {{ student.surname }}"> {{ student.name }} {{ student.surname }}</option>
+
+            {% endfor %}
+
+        </select>
+    </div>
+    <input type="text" name="course_name" id="course_name" value="{{ course.name }}" hidden="true">
+    <div>
+        <button>Sign up</button>
+    </div>
+</form>{% endblock %}
