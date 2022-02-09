@@ -5,7 +5,10 @@ To start my_site (which is created via my_web_framework) use command:
 gunicorn my_site
 ```
 ***
-open urls in browser
+Open
+[course page](http://127.0.0.1:8000/course?name=Python).
+See a form 'Sign up a student for course' at the bottom of page.
+To Add a student to the current course, select a student in the deopdown list and press 'Sign up' button
 ```
 http://127.0.0.1:8000
 ```
