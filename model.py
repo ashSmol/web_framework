@@ -27,7 +27,10 @@ class Course(Iterable):
     name: str
     description: str
 
-    def __init__(self):
+    def __init__(self, course_id, name, description):
+        self.id = course_id
+        self.name = name
+        self.description = description
         self.students = []
 
     def add_student(self, student: 'Student'):
@@ -40,33 +43,14 @@ class Course(Iterable):
 
 
 class Student:
-    def __init__(self, name, surname):
+    def __init__(self, student_id, name, surname):
+        self.id = student_id
         self.name = name
         self.surname = surname
 
 
-class TrainingSite:
-    course_categories: list
-    courses: list
-    students: list
-
-    def get_categories(self):
-        return self.course_categories
-
-    def get_courses(self):
-        return self.courses
-
-    def get_course_by_name(self, name):
-        for course in self.courses:
-            if course.name == name:
-                return course
-        return None
-
-    def get_students(self):
-        return self.students
-
-    def get_student(self, name, surname):
-        for student in self.students:
-            if (student.name == name) & (student.surname == surname):
-                return student
-        return None
+class CourseStudentLink:
+    def __init__(self, link_id, course_id, student_id):
+        self.id = link_id
+        self.course_id = course_id
+        self.student_id = student_id

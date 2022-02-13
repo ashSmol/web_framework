@@ -1,13 +1,12 @@
 from pprint import pprint
 
-from model import TrainingSite
 from my_web_framework import BaseController, Debug
 from patterns import ObjectBuilder
 
 
 class CreateCategory(BaseController):
     @Debug()
-    def __call__(self, request, model: TrainingSite):
+    def __call__(self, request, model):
         status_code = '200 OK'
         template_params = {}
 

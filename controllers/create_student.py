@@ -1,13 +1,13 @@
 from pprint import pprint
 
-from model import TrainingSite, Student
+from model import Student
 from my_web_framework import BaseController, Debug
 from patterns import ObjectBuilder
 
 
 class CreateStudent(BaseController):
     @Debug()
-    def __call__(self, request, model: TrainingSite):
+    def __call__(self, request, model):
         status_code = '200 OK'
         template_params = {}
 
@@ -22,14 +22,15 @@ class CreateStudent(BaseController):
             template_params.update(self.get_post_params(request))
             print(f'template params: {template_params}')
 
-            new_student = Student(template_params['firstname'], template_params['surname'])
-            model.students.append(new_student)
+            new_student = Student(None, template_params['firstname'], template_params['surname'])
+            model.add_new_student(new_student)
+
             template_params.update({'student': new_student})
 
             body = self.get_rendered_template('create_student.html', template_params)
             return status_code, body
 
-        template_params.update({'students': model.students})
+        template_params.update({'students': model.get_students()})
         body = self.get_rendered_template('create_student.html', template_params)
 
         return status_code, body

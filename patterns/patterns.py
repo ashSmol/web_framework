@@ -1,5 +1,3 @@
-from collections.abc import Iterator
-
 from model import CourseCategory, Course
 
 
@@ -25,7 +23,7 @@ class ObjectBuilder:
         if obj_type == 'category':
             self.obj = CourseCategory()
         elif obj_type == 'course':
-            self.obj = Course()
+            self.obj = Course(None, None, None)
         else:
             raise ValueError(f'Object type {obj_type} is not defined')
 

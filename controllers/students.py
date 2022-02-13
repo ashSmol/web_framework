@@ -1,12 +1,10 @@
 from pprint import pprint
-
-from model import TrainingSite
 from my_web_framework import BaseController, Debug
 
 
 class Students(BaseController):
     @Debug()
-    def __call__(self, request, model: TrainingSite):
+    def __call__(self, request, model):
         status_code = '200 OK'
         template_params = {}
 
@@ -23,7 +21,7 @@ class Students(BaseController):
             body = self.get_rendered_template('students.html', template_params)
             return status_code, body
 
-        template_params.update({'students': model.students})
+        template_params.update({'students': model.get_students()})
         body = self.get_rendered_template('students.html', template_params)
 
         return status_code, body

@@ -1,13 +1,12 @@
 from pprint import pprint
 
-from model import TrainingSite
 from my_web_framework import BaseController, Debug
 from patterns import ObjectBuilder
 
 
 class CreateCourse(BaseController):
     @Debug()
-    def __call__(self, request, model: TrainingSite):
+    def __call__(self, request, model):
         status_code = '200 OK'
         template_params = {}
 
@@ -26,7 +25,7 @@ class CreateCourse(BaseController):
             new_course.set_obj_name(template_params['course_name'])
             new_course.set_obj_description(template_params['course_description'])
             new_course = new_course.build()
-            model.courses.append(new_course)
+            model.add_new_course(new_course)
             template_params.update({'course': new_course})
 
             body = self.get_rendered_template('create_course.html', template_params)
