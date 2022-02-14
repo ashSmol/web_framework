@@ -47,10 +47,3 @@ class Student:
         self.id = student_id
         self.name = name
         self.surname = surname
-
-
-class CourseStudentLink:
-    def __init__(self, link_id, course_id, student_id):
-        self.id = link_id
-        self.course_id = course_id
-        self.student_id = student_id

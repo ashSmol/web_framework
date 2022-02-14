@@ -14,7 +14,11 @@ class CoursePage(BaseController):
         print('*' * 100)
         if self.get_request_method(request) == 'GET':
             rq_params = self.get_get_params(request)
+            pprint(rq_params)
             course_id = rq_params['course_id']
+            if rq_params.get('action') == 'graduate':
+                model.graduate_all_students_from_course(course_id)
+
             course_obj = model.get_course_by_id(course_id)
             course_obj.students = model.find_students_for_course(course_obj)
             template_params['course'] = course_obj

@@ -1,8 +1,8 @@
 import sqlite3
 
+from models.course_student_link import CourseStudentLinkMapper, UnitOfWork
 from my_web_framework import Application
 from patterns import ObjectBuilder, CourseMapper, StudentMapper
-from patterns.mappers import CourseStudentLinkMapper
 from routes import ROUTES
 from controllers import MyFrontController
 from logger import Logger
@@ -33,9 +33,9 @@ class TrainingSite:
 
     def sign_up_student_for_course(self, course, student):
         if not (student in course):
-            CourseStudentLinkMapper(self.connection).insert(course, student)
+            CourseStudentLinkMapper(self.connection).insert(course.id, student.id)
 
-    def find_students_for_course(self, course):
+    def find_students_for_course(self, course) -> list('Student'):
         links = CourseStudentLinkMapper(self.connection).find_students_for_course(course.id)
         result = []
         for link in links:
@@ -53,6 +53,22 @@ class TrainingSite:
 
     def add_new_student(self, student):
         StudentMapper(self.connection).insert(student)
+
+    def graduate_all_students_from_course(self, course_id):
+        print(f'DEBUG!!!! -  graduate_all_students_from_course')
+        links = CourseStudentLinkMapper(self.connection).find_students_for_course(course_id)
+        print(links)
+        try:
+            UnitOfWork.new_current()
+            print(f'UNIT OF WORK -- {UnitOfWork.get_current()}')
+            for link in links:
+                link.mark_removed()
+            print(f'UNIT OF WORK')
+            UnitOfWork.get_current().commit()
+        except Exception as e:
+            raise Exception(e.args)
+        finally:
+            UnitOfWork.set_current(None)
 
 
 connection = sqlite3.Connection('my_db.db')
