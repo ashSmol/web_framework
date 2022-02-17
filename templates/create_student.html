@@ -4,11 +4,12 @@
 
 <style type="text/css">
         .important { color: #336699; }
-
-
-
-
 </style>
+<style type="text/css">
+        .error { color: red; }
+</style>
+
+
 {% endblock %}
 {% block content %}
 <h1>Create a new student</h1>
@@ -33,8 +34,12 @@
     </div>
 </form>
 {% set student = params['student'] %}
+{% set errors = params['errors'] %}
 
 {% if student %}
 A New student with name: <b>{{ student.name }}</b> <br> and surname:  <b>{{ student.surname }}</b> <br> is created!!!
+{% endif %}
+{% if errors %}
+<p class="error"> Error occurs during Creation student: <br> <b>{{ errors }}</b> </p>
 {% endif %}
 {% endblock %}

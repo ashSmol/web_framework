@@ -37,7 +37,10 @@ class StudentMapper:
 
     def find_by_id(self, student_id):
         statement = "SELECT ID, NAME, SURNAME FROM STUDENT WHERE ID=?"
-        self.cursor.execute(statement, (student_id,))
+        try:
+            self.cursor.execute(statement, (student_id,))
+        except Exception as e:
+            raise RecordNotFoundException(e.args)
         result = self.cursor.fetchone()
         if result:
             return Student(*result)
@@ -46,11 +49,10 @@ class StudentMapper:
 
     def insert(self, student):
         statement = "INSERT INTO STUDENT (NAME, SURNAME) VALUES (?, ?)"
-        self.cursor.execute(statement, (student.name, student.surname))
         try:
+            self.cursor.execute(statement, (student.name, student.surname))
             self.connection.commit()
-            result = self.cursor.execute('select last_insert_rowid()',
-                                         ).fetchone()
+            result = self.cursor.execute('select last_insert_rowid()', ).fetchone()
             student.id = result[0]
 
         except Exception as e:
@@ -58,16 +60,16 @@ class StudentMapper:
 
     def update(self, student):
         statement = "UPDATE STUDENT SET NAME=?, SURNAME=? WHERE ID=?"
-        self.cursor.execute(statement, (student.name, student.surname, student.id))
         try:
+            self.cursor.execute(statement, (student.name, student.surname, student.id))
             self.connection.commit()
         except Exception as e:
             raise DbUpdateException(e.args)
 
     def delete(self, student: Student):
         statement = "DELETE FROM STUDENT WHERE ID=?"
-        self.cursor.execute(statement, (student.id,))
         try:
+            self.cursor.execute(statement, (student.id,))
             self.connection.commit()
         except Exception as e:
             raise DbDeleteException(e.args)
@@ -98,8 +100,9 @@ class CourseMapper:
 
     def insert(self, course: Course):
         statement = "INSERT INTO COURSE (NAME, DESCRIPTION) VALUES (?, ?)"
-        self.cursor.execute(statement, (course.name, course.description))
         try:
+            self.cursor.execute(statement, (course.name, course.description))
+
             self.connection.commit()
             result = self.cursor.execute('select last_insert_rowid()',
                                          ).fetchone()
@@ -109,16 +112,16 @@ class CourseMapper:
 
     def update(self, course: Course):
         statement = "UPDATE COURSE SET NAME=?, DESCRIPTION=? WHERE ID=?"
-        self.cursor.execute(statement, (course.name, course.description, course.id))
         try:
+            self.cursor.execute(statement, (course.name, course.description, course.id))
             self.connection.commit()
         except Exception as e:
             raise DbUpdateException(e.args)
 
     def delete(self, course: Course):
         statement = "DELETE FROM COURSE WHERE ID=?"
-        self.cursor.execute(statement, (course.id,))
         try:
+            self.cursor.execute(statement, (course.id,))
             self.connection.commit()
         except Exception as e:
             raise DbDeleteException(e.args)

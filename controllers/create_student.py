@@ -2,7 +2,6 @@ from pprint import pprint
 
 from model import Student
 from my_web_framework import BaseController, Debug
-from patterns import ObjectBuilder
 
 
 class CreateStudent(BaseController):
@@ -21,12 +20,15 @@ class CreateStudent(BaseController):
         if self.get_request_method(request) == 'POST':
             template_params.update(self.get_post_params(request))
             print(f'template params: {template_params}')
+            try:
+                new_student = Student(None, template_params['firstname'], template_params['surname'])
 
-            new_student = Student(None, template_params['firstname'], template_params['surname'])
-            model.add_new_student(new_student)
+                model.add_new_student(new_student)
 
-            template_params.update({'student': new_student})
-
+                template_params.update({'student': new_student})
+            except Exception as e:
+                print(e.args)
+                template_params['errors'] = e.args
             body = self.get_rendered_template('create_student.html', template_params)
             return status_code, body
 

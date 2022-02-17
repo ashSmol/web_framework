@@ -1,6 +1,11 @@
 from collections.abc import Iterable, Iterator
 
 
+class IncorrectFieldValueException(Exception):
+    def __init__(self, msg):
+        raise Exception(f'Record not found! \n {msg}')
+
+
 class StudentsIterator(Iterator):
     _position: int = None
 
@@ -47,3 +52,12 @@ class Student:
         self.id = student_id
         self.name = name
         self.surname = surname
+        self.validate()
+
+    def validate(self):
+        if (len(self.name) < 3) | (' ' in self.name):
+            raise IncorrectFieldValueException(
+                'Incorrect Student name. It must be longer than 3 symbols and not contain spaces')
+        if (len(self.surname) < 3) | (' ' in self.surname):
+            raise IncorrectFieldValueException(
+                'Incorrect Student surname. It must be longer than 3 symbols and not contain spaces')

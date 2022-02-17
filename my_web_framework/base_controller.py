@@ -1,9 +1,10 @@
+import abc
 from urllib.parse import unquote
 
 from jinja2 import Environment, FileSystemLoader
 
 
-class BaseController:
+class BaseController(abc.ABC, BaseException):
     def get_rendered_template(self, template_name: str, template_params: dict):
         template = Environment(loader=FileSystemLoader('templates')).get_template(template_name)
         return template.render(params=template_params).encode('utf8')

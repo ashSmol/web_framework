@@ -1,7 +1,7 @@
 import threading
 import sqlite3
 
-from patterns.mappers import DbDeleteException
+from patterns.mappers import DbDeleteException, RecordNotFoundException
 
 connection = sqlite3.connect('my_db.db')
 
@@ -12,8 +12,12 @@ class CourseStudentLinkMapper:
         self.cursor = _connection.cursor()
 
     def find_courses_for_student(self, student_id):
+
         statement = "SELECT ID, COURSE_ID, STUDENT_ID FROM COURSE_STUDENT WHERE STUDENT_ID=?"
-        self.cursor.execute(statement, (student_id,))
+        try:
+            self.cursor.execute(statement, (student_id,))
+        except Exception as e:
+            raise RecordNotFoundException(e.args)
         results = self.cursor.fetchall()
         if results:
             return [CourseStudentLink(*result) for result in results]
@@ -23,7 +27,10 @@ class CourseStudentLinkMapper:
     def find_students_for_course(self, course_id):
 
         statement = "SELECT ID, COURSE_ID, STUDENT_ID FROM COURSE_STUDENT WHERE COURSE_ID=?"
-        self.cursor.execute(statement, (course_id,))
+        try:
+            self.cursor.execute(statement, (course_id,))
+        except Exception as e:
+            raise RecordNotFoundException(e.args)
         results = self.cursor.fetchall()
         if results:
             return [CourseStudentLink(*result) for result in results]
