@@ -3,14 +3,14 @@ import sqlite3
 from models.course_student_link import CourseStudentLinkMapper, UnitOfWork
 from my_web_framework import Application
 from patterns import ObjectBuilder, CourseMapper, StudentMapper
-from routes import ROUTES
-from controllers import MyFrontController
+# from routes import ROUTES
+# from controllers import MyFrontController
 from logger import Logger
 
 logger = Logger('my_logger')
 
 front_controllers = [
-    MyFrontController
+    # MyFrontController
 ]
 
 
@@ -85,4 +85,11 @@ logger.log('creating courses!!!')
 
 my_site_model.course_categories = [programming_category, testing_category]
 
-application = Application(ROUTES, front_controllers, my_site_model)
+application = Application(front_controllers, my_site_model)
+
+from controllers import About
+
+
+@application.url('asdkjagsda')
+def tessss():
+    return None

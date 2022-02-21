@@ -1,7 +1,10 @@
 from pprint import pprint
+
 from my_web_framework import BaseController, Debug
+from my_site import application
 
 
+@application.url('/categories')
 class CourseCategories(BaseController):
     @Debug()
     def __call__(self, request, model):

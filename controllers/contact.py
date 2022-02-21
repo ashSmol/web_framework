@@ -1,7 +1,10 @@
 from pprint import pprint
+
+from my_site import application
 from my_web_framework import BaseController, Debug
 
 
+@application.url('/contact')
 class Contact(BaseController):
     @Debug()
     def __call__(self, request, model):

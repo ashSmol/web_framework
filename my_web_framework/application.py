@@ -1,6 +1,7 @@
 class Application:
-    def __init__(self, routes: dict, front_controllers: list, model):
-        self.routes = routes
+    def __init__(self, front_controllers: list, model):
+        self.urls = {}
+
         self.front_controllers = front_controllers
         self.model = model
 
@@ -31,4 +32,11 @@ class Application:
             if path[-1] == '/':
                 path = path[:- 1]
 
-        return self.routes[path] if path in self.routes else NotFoundPage()
+        return self.urls[path] if path in self.urls else NotFoundPage()
+
+    def url(self, route):
+        def wrapper(controller):
+            self.urls[route] = controller()
+            return controller
+
+        return wrapper

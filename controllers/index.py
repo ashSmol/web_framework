@@ -1,6 +1,9 @@
 from my_web_framework import BaseController, Debug
 
+from my_site import application
 
+
+@application.url('/')
 class Index(BaseController):
     @Debug()
     def __call__(self, request, model):

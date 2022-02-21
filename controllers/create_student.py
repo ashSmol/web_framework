@@ -3,7 +3,10 @@ from pprint import pprint
 from model import Student
 from my_web_framework import BaseController, Debug
 
+from my_site import application
 
+
+@application.url('/create_student')
 class CreateStudent(BaseController):
     @Debug()
     def __call__(self, request, model):
